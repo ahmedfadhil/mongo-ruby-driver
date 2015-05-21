@@ -26,8 +26,8 @@ module Mongo
     # @api semipublic
     class Reply < Message
 
-      def event(server, duration)
-        Monitoring::Event::Completed.new('query', nil, nil, server, duration)
+      def payload
+        { reply: documents }
       end
 
       private
