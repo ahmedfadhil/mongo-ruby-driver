@@ -26,6 +26,14 @@ module Mongo
     # @api semipublic
     class Reply < Message
 
+      # Return the event payload for monitoring.
+      #
+      # @example Return the event payload.
+      #   message.payload
+      #
+      # @return [ Hash ] The event payload.
+      #
+      # @since 2.1.0
       def payload
         { reply: documents }
       end
