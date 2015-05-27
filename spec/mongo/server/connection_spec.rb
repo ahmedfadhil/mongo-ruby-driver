@@ -6,8 +6,12 @@ describe Mongo::Server::Connection do
     Mongo::Address.new(DEFAULT_ADDRESS)
   end
 
+  let(:monitoring) do
+    Mongo::Monitoring.new
+  end
+
   let(:server) do
-    Mongo::Server.new(address, Mongo::Event::Listeners.new, ssl: SSL)
+    Mongo::Server.new(address, monitoring, Mongo::Event::Listeners.new, ssl: SSL)
   end
 
   describe '#connect!' do

@@ -2,8 +2,12 @@ require 'spec_helper'
 
 describe Mongo::Cluster do
 
+  let(:monitoring) do
+    Mongo::Monitoring.new
+  end
+
   let(:cluster) do
-    described_class.new(ADDRESSES, TEST_OPTIONS)
+    described_class.new(ADDRESSES, monitoring, TEST_OPTIONS)
   end
 
   describe '#==' do
@@ -15,7 +19,7 @@ describe Mongo::Cluster do
         context 'when the options are the same' do
 
           let(:other) do
-            described_class.new(ADDRESSES, TEST_OPTIONS)
+            described_class.new(ADDRESSES, monitoring, TEST_OPTIONS)
           end
 
           it 'returns true' do
@@ -26,7 +30,7 @@ describe Mongo::Cluster do
         context 'when the options are not the same' do
 
           let(:other) do
-            described_class.new([ '127.0.0.1:27017' ], TEST_OPTIONS.merge(:replica_set => 'test'))
+            described_class.new([ '127.0.0.1:27017' ], monitoring, TEST_OPTIONS.merge(:replica_set => 'test'))
           end
 
           it 'returns false' do
@@ -38,7 +42,7 @@ describe Mongo::Cluster do
       context 'when the addresses are not the same' do
 
         let(:other) do
-          described_class.new([ '127.0.0.1:27018' ], TEST_OPTIONS)
+          described_class.new([ '127.0.0.1:27018' ], monitoring, TEST_OPTIONS)
         end
 
         it 'returns false' do
@@ -76,7 +80,7 @@ describe Mongo::Cluster do
     context 'when the option is provided' do
 
       let(:cluster) do
-        described_class.new([ '127.0.0.1:27017' ], TEST_OPTIONS.merge(:replica_set => 'testing'))
+        described_class.new([ '127.0.0.1:27017' ], monitoring, TEST_OPTIONS.merge(:replica_set => 'testing'))
       end
 
       it 'returns the name' do
@@ -87,7 +91,7 @@ describe Mongo::Cluster do
     context 'when the option is not provided' do
 
       let(:cluster) do
-        described_class.new([ '127.0.0.1:27017' ], TEST_OPTIONS)
+        described_class.new([ '127.0.0.1:27017' ], monitoring, TEST_OPTIONS)
       end
 
       it 'returns nil' do

@@ -6,8 +6,12 @@ describe Mongo::Auth::CR do
     Mongo::Address.new(DEFAULT_ADDRESS)
   end
 
+  let(:monitoring) do
+    Mongo::Monitoring.new
+  end
+
   let(:server) do
-    Mongo::Server.new(address, Mongo::Event::Listeners.new, TEST_OPTIONS)
+    Mongo::Server.new(address, monitoring, Mongo::Event::Listeners.new, TEST_OPTIONS)
   end
 
   let(:connection) do
