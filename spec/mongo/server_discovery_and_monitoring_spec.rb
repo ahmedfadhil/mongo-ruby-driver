@@ -38,7 +38,7 @@ describe 'Server Discovery and Monitoring' do
             @address = address
             @monitoring = monitoring
             @options = options.freeze
-            @monitor = Monitor.new(address, monitoring, event_listeners, options)
+            @monitor = Monitor.new(address, event_listeners, options)
           end
 
           # Disconnect simply needs to return true since we have no monitor and
@@ -63,7 +63,7 @@ describe 'Server Discovery and Monitoring' do
             @address = address
             @monitoring = monitoring
             @options = options.freeze
-            @monitor = Monitor.new(address, monitoring, event_listeners, options)
+            @monitor = Monitor.new(address, event_listeners, options)
             @monitor.scan!
             @monitor.run!
           end
