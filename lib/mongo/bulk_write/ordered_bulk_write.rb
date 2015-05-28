@@ -13,11 +13,12 @@
 # limitations under the License.
 
 module Mongo
-
   module BulkWrite
 
+    # Represents an ordered bulk write operation.
+    #
+    # @since 2.0.0
     class OrderedBulkWrite
-
       include BulkWritable
 
       private
